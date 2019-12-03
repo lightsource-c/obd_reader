@@ -1,15 +1,21 @@
 buildscript {
     repositories {
-        mavenCentral()
+        google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.android.tools.build:gradle:3.5.1'
+
     }
+
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
 }
 
 apply plugin: 'com.android.application'
@@ -17,11 +23,16 @@ apply plugin: 'com.android.application'
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+    jcenter()
 }
 
 android {
     compileSdkVersion 22
-    android.buildToolsVersion "23.0.1"
+    android.buildToolsVersion "28.0.3"
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 21
@@ -41,8 +52,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'org.roboguice:roboguice:3.+'
-    provided 'org.roboguice:roboblender:3.+'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    implementation 'com.android.support:appcompat-v7:22.1.1'
+    implementation 'org.roboguice:roboguice:3.0.1'
+    compileOnly 'org.roboguice:roboblender:3.0.1'
+    implementation 'com.squareup.retrofit:retrofit:1.9.0'
+    annotationProcessor 'org.roboguice:roboblender:3.0.1'
 }
